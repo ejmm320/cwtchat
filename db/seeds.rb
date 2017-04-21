@@ -5,3 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+dialect = Dialect.create({name: 'Yoda', apiurl: 'http://api.funtranslations.com/translate/yoda.json', icon: 'yoda.png' })
