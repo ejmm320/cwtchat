@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if @user_session.login_valid?
       session[:current_user] = @user_session.identity
       session[:dialect] = @user_session.dialect
-      redirect_to room_path(Room.first)
+      redirect_to room_path(Room.first) # We are working with a single room
     else
       flash[:notice] = "User #{@user_session.username} does not exists"
       render :new
