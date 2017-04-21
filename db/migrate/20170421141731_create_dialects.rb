@@ -6,6 +6,6 @@ class CreateDialects < ActiveRecord::Migration[5.0]
       t.string :icon
       t.timestamps
     end
-    add_index :dialects, :name, unique: true
+    add_index :dialects, :name, unique: true, name: 'idxdialect1'
   end
 end
