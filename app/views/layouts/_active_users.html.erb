@@ -1,0 +1,9 @@
+<% if session[:current_user].present? %>
+<div class="row">
+  <div class="alert alert-warning"> Active Users 
+    <div class="list-group" id="active_users">
+      <%= render @sessions %>
+    </div>
+  </div>
+</div>
+<% end %>

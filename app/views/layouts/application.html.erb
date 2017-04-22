@@ -10,7 +10,15 @@
 
   <body>
     <div class="container">
-      <%= yield %>
+      <div class="row">
+        <div class="col col-md-10">
+          <%= yield %>
+        </div>
+        <div class="col col-md-2" id="active_users">
+          <br>
+          <%= render 'layouts/active_users' %>
+        </div>
+      </div>
     </div>
   </body>
 </html>

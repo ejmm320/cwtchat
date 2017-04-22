@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def new
     @user_session = UserSession.new
+    @sessions = User.active_users
   end
 
   def create
@@ -8,7 +9,8 @@ class SessionsController < ApplicationController
     if @user_session.login_valid?
       session[:current_user] = @user_session.identity
       session[:dialect] = @user_session.dialect
-      redirect_to room_path(Room.first) # We are working with a single room
+      @user_session.activate_session
+      redirect_to room_path(Room.first) # We are working with a Single Room, id: 1
     else
       flash[:notice] = "User #{@user_session.username} does not exists"
       render :new
@@ -16,6 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    UserSession.deactivate_session(session[:current_user])
     session.clear
     redirect_to root_path
   end

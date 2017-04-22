@@ -13,7 +13,7 @@ dialect3 = Dialect.create({name: 'Minion', apiurl: 'http://api.funtranslations.c
 
 # Create 4 users whom speaks random dialects
 1.upto(4) do |i|
-  User.create({username: "ecratum#{i}", dialect_id: eval("dialect#{rand(1..3)}.id"), active: true})
+  User.create({username: "ecratum#{i}", dialect_id: eval("dialect#{rand(1..3)}.id"), active: false})
 end
 
 # Create a room to show chat

@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   before_action :check_permissions, only: [:show]
 
   def show
+    @sessions = User.active_users
     @messages = Message.all
     @message = Message.new
   end
