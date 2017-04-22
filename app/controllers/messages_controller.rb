@@ -12,7 +12,11 @@ class MessagesController < ApplicationController
     #@message.content_translated = response["contents"]["translated"]
     @message.content_translated = @message.content
     if @message.save
-      ActionCable.server.broadcast "room_channel", message: @message.content_translated
+      ActionCable.server.broadcast "room_channel", 
+            message: @message.content_translated, 
+            user: @message.user.username, 
+            dialect: @message.dialect.icon,
+            created_at: @message.created_at
     end
     #render text: "Usuario: #{@message.user_id}, Mensaje: #{response["contents"]["translated"]}, Dialecto: #{@dialect.apiurl}"
     #@message.save

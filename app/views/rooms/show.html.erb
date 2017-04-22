@@ -1,8 +1,10 @@
 <br />
-<h4>Welcome to this room! <%= @user.username %> now you will be speaking in <%= @dialect.name %><%= image_tag "#{@dialect.icon}", size: "80x80"%></h4>
+<div class="alert alert-info">
+  <h4>Welcome to this room! <%= @user.username %> now you will be speaking in <%= @dialect.name %><%= image_tag "#{@dialect.icon}", size: "80x80"%></h4>
+</div>
 <br />
 <br />
-<div class="list-group">
+<div class="list-group" id="messages">
   <%= render @messages %>
 </div>
 <br>
