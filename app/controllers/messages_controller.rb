@@ -7,10 +7,13 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user_id = session[:current_user]
     @message.dialect = @dialect
-    #uri = URI("#{@dialect.apiurl}?text=#{URI.encode(@message.content)}")
-    #response = JSON.parse(Net::HTTP.get(uri))
-    #@message.content_translated = response["contents"]["translated"]
-    @message.content_translated = @message.content
+    uri = URI("#{@dialect.apiurl}?text=#{URI.encode(@message.content)}")
+    response = JSON.parse(Net::HTTP.get(uri))
+    if response["contents"].nil?
+      @message.content_translated = @message.content
+    else
+      @message.content_translated = response["contents"]["translated"]
+    end
     if @message.save
       ActionCable.server.broadcast "room_channel", 
             message: @message.content_translated, 
@@ -18,8 +21,6 @@ class MessagesController < ApplicationController
             dialect: @message.dialect.icon,
             created_at: @message.created_at
     end
-    #render text: "Usuario: #{@message.user_id}, Mensaje: #{response["contents"]["translated"]}, Dialecto: #{@dialect.apiurl}"
-    #@message.save
   end
 
   private
