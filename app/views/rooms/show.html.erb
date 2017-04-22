@@ -1,7 +1,7 @@
 <h1>Rooms#show</h1>
 <p><%= "User: #{@user.username} who wants to speak in: #{@dialect.name}" %></p>
-<div id="messages">
-  <%#= render @messages %>
+<div class="list-group">
+  <%= render @messages %>
 </div>
 <%= form_for @message do |f| %>
   <div class="form-group">
