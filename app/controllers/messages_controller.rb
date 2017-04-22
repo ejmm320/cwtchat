@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  require 'net/http'
 
   before_action :set_dialect_info, only: [:create]
 
@@ -6,7 +7,9 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user_id = session[:current_user]
     @message.dialect = @dialect
-    render text: "Usuario: #{@message.user_id}, Mensaje: #{@message.content}, Dialecto: #{@dialect.apiurl}"
+    uri = URI("#{@dialect.apiurl}?text=#{URI.encode(@message.content)}")
+    response = JSON.parse(Net::HTTP.get(uri))
+    render text: "Usuario: #{@message.user_id}, Mensaje: #{response["contents"]["translated"]}, Dialecto: #{@dialect.apiurl}"
     #@message.save
   end
 
