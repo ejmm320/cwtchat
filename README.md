@@ -4,12 +4,15 @@
 This is a small chat interface with the main goal of having some fun with your friends, the interface is really minimalistic because it was developed under the principle to avoid using external libraries or gems as much as possible.
 
 * Ruby version
+
 Ruby v-2.3.3 - Rails v-5.0.2
 
 * System dependencies
+
 Postgresql v-9.5
 
 * Database creation
+
 The app needs that you previously create a role called cwchat using the following sentence on your postgresql client:
 
 ```sql
@@ -17,17 +20,20 @@ The app needs that you previously create a role called cwchat using the followin
 ```
 
 * Database initialization
+
 ```sh
 $ rails db:create && rails db:migrate && rails db:seed
 ```
-The app only works with registered users, you can see the full-list of allowed users in seed.rb file (ecratum[1..4]) and there is only one room for chating. After user completes login input with their username and select a dialect, they are redirected to the main room.
+The app only works with registered users, you can see the full-list of allowed users in seed.rb file (ecratum[1..4]) and there is only one room for chating. After users completes login input with their username and select a dialect, they are redirected to the main room.
 
 * How to run the test suite
+
 ```sh
 $ rspec
 ```
 
 * Services
+
 The entire application uses [FunTranslations API] (http://http://funtranslations.com/api) in order to translate to vernacular languages the messages (supporting: Yoda, Klingon and Minion), but there is a limit of translations per hour for public users (5), so for the sake of keep the application functional if the user reach this limit then it starts to send raw messages (without translations) to the connected users.
 
 * Deployment instructions
@@ -40,4 +46,5 @@ All you have to do is:
 * Run $ rails server -b 0.0.0.0
 
 * Known Bugs
+
 Probably sometimes the main room view get stock and doesn't allow to send messages, you just have to refresh the page. When I have the time I'll fixed that.
