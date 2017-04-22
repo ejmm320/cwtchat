@@ -13,4 +13,12 @@ App.room = App.cable.subscriptions.create "RoomChannel",
                               </div>
                               <div><p>"+data['message']+"</p></div>
                           </div>"
+    if data['message'] == 'login'
+      $('#active_users div.list-group').append "<div class=\"list-group-item\">
+                                   <small>"+data['user']+"</small>
+                                 </div>"
+
+    if data['message'] == 'logout'
+      $("#active_users div small:contains("+data['user']+")").parent().remove();
+    
     # Called when there's incoming data on the websocket for this channel

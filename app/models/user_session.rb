@@ -12,10 +12,6 @@ class UserSession
     User.find_by(username: @username).update(active: true)
   end
 
-  def self.deactivate_session(id)
-    User.find(id).update(active: false)
-  end
-
   def login_valid?
     User.exists?(username: @username)
   end

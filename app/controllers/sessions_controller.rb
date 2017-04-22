@@ -10,6 +10,11 @@ class SessionsController < ApplicationController
       session[:current_user] = @user_session.identity
       session[:dialect] = @user_session.dialect
       @user_session.activate_session
+      ActionCable.server.broadcast "room_channel", 
+            message: "login", 
+            user: @user_session.username, 
+            dialect: Dialect.find(@user_session.dialect).icon,
+            created_at: Time.now
       redirect_to room_path(Room.first) # We are working with a Single Room, id: 1
     else
       flash[:notice] = "User #{@user_session.username} does not exists"
@@ -18,7 +23,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    UserSession.deactivate_session(session[:current_user])
+    user = User.find(session[:current_user])
+    user.update(active: false)
+    ActionCable.server.broadcast "room_channel", 
+            message: "logout", 
+            user: user.username, 
+            dialect: Dialect.find(session[:dialect]).icon,
+            created_at: Time.now
     session.clear
     redirect_to root_path
   end
