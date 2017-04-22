@@ -13,5 +13,4 @@ App.room = App.cable.subscriptions.create "RoomChannel",
                               </div>
                               <div><p>"+data['message']+"</p></div>
                           </div>"
-    # alert data['message']
     # Called when there's incoming data on the websocket for this channel
