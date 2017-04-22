@@ -34,7 +34,7 @@ $ rspec
 
 * Services
 
-The entire application uses [FunTranslations API](http://http://funtranslations.com/api) in order to translate to vernacular languages the messages (supporting: Yoda, Klingon and Minion), but there is a limit of translations per hour for public users (5), so for the sake of keep the application functional if the user reach this limit then it starts to send raw messages (without translations) to the connected users.
+The entire application uses [FunTranslations API](http://funtranslations.com/api) in order to translate to vernacular languages the messages (supporting: Yoda, Klingon and Minion), but there is a limit of translations per hour for public users (5), so for the sake of keep the application functional if the user reach this limit then it starts to send raw messages (without translations) to the connected users.
 
 * Deployment instructions
 
