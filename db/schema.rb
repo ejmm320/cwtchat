@@ -26,9 +26,11 @@ ActiveRecord::Schema.define(version: 20170421211648) do
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
+    t.integer  "dialect_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dialect_id"], name: "index_messages_on_dialect_id", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
@@ -49,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170421211648) do
     t.index ["username"], name: "idxuser1", unique: true, using: :btree
   end
 
+  add_foreign_key "messages", "dialects"
   add_foreign_key "messages", "users"
   add_foreign_key "users", "dialects"
 end

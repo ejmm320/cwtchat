@@ -1,2 +1,14 @@
 <h1>Rooms#show</h1>
 <p><%= "User: #{@user.username} who wants to speak in: #{@dialect.name}" %></p>
+<div id="messages">
+  <%#= render @messages %>
+</div>
+<%= form_for @message do |f| %>
+  <div class="form-group">
+    <%= f.label :your_message %>:
+    <%= f.text_area :content, class: "form-control", data: {textarea: "message"} %>
+  </div>
+  <div>
+    <%= f.submit "Send", class: "btn btn-primary", data: {send: "message"} %>
+  </div>
+<% end %>
