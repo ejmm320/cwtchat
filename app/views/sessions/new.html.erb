@@ -1,7 +1,9 @@
 <div class="row align-items-center">
   <div class="col-md-6">
-     <div class="alert alert-danger"><%= flash[:notice] if flash[:notice]  %></div>
-   
+    <% if flash[:notice]%>
+     <div class="alert alert-danger"><%= flash[:notice] %></div>
+    <% end %>
+    <br><br>
      <%= form_for @user_session, url: sessions_path do |f| %>
        <div class="form-group">
          <%= f.label :username %>

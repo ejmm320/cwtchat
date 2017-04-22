@@ -8,7 +8,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   received: (data) ->
     $('#messages').append "<div class=\"list-group-item\">
                               <div class=\"d-flex w-100 justify-content-between\">
-                                <h5>"+data['user']+"</h5>
+                                <h5><img src=\"../"+data['dialect']+"\"/>"+data['user']+"</h5>
                                 <small>"+data['created_at']+"</small>
                               </div>
                               <div><p>"+data['message']+"</p></div>
