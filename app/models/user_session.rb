@@ -15,6 +15,10 @@ class UserSession
   def login_valid?
     User.exists?(username: @username)
   end
+
+  def already_authenticated?
+    User.find_by(username: @username).active
+  end
   
 
   def identity

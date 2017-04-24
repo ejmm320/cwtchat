@@ -7,15 +7,20 @@ class SessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params_user_session)
     if @user_session.login_valid?
-      session[:current_user] = @user_session.identity
-      session[:dialect] = @user_session.dialect
-      @user_session.activate_session
-      ActionCable.server.broadcast "room_channel", 
-            message: "login", 
-            user: @user_session.username, 
-            dialect: Dialect.find(@user_session.dialect).icon,
-            created_at: Time.now
-      redirect_to room_path(Room.first) # We are working with a Single Room, id: 1
+      if @user_session.already_authenticated?
+        flash[:notice] = "User #{@user_session.username} cannot enter because is already logged in using another machine"
+        render :new  
+      else
+        session[:current_user] = @user_session.identity
+        session[:dialect] = @user_session.dialect
+        @user_session.activate_session
+        ActionCable.server.broadcast "room_channel", 
+              message: "login", 
+              user: @user_session.username, 
+              dialect: Dialect.find(@user_session.dialect).icon,
+              created_at: Time.now
+        redirect_to room_path(Room.first) # We are working with a Single Room, id: 1
+      end
     else
       flash[:notice] = "User #{@user_session.username} does not exists"
       render :new
