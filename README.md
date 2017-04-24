@@ -43,8 +43,14 @@ All you have to do is:
 * Clone the repo
 * Create a database role cwtchat with password cwtchat.
 * Run from command line the Database initialization commands.
-* Run $ rails server -b 0.0.0.0
+* Run in console:
 
-* Known Bugs
+```sh
+$ rails server -b 0.0.0.0
+```
 
-Probably sometimes the main room view get stock and doesn't allow to send messages, you just have to refresh the page. When I have the time I'll fixed that.
+* Open your browser and go to http://localhost:3000
+
+* Known Issues
+
+- You need to Logout using the provided link "Leave" in order to be able to open a new session using the same username, closing the browser keep the user active.
