@@ -51,6 +51,7 @@ $ rails server -b 0.0.0.0
 
 * Open your browser and go to http://localhost:3000
 
+
 * Known Issues
 
 - You need to Logout using the provided link "Leave" in order to be able to open a new session using the same username, closing the browser keep the user active.
